@@ -1,0 +1,70 @@
+version: "3.7"
+
+services:
+  ubuntu:
+    build: .
+    container_name: ubuntu
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - .:/home/tumypmyp
+    # network_mode: "host"
+    ports:
+       - 1000:1000
+
+  ubuntu2:
+    build: .
+    container_name: ubuntu2
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - .:/home/tumypmyp
+    # network_mode: "host"
+    ports:
+       - 2000:2000
+
+
+
+
+  wireshark:
+    image: lscr.io/linuxserver/wireshark
+    container_name: wireshark
+    cap_add:
+      - NET_ADMIN
+    # network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/config:/config
+    ports:
+      - 3000:3000 #optional
+    restart: unless-stopped
+
+  # ubuntu_server:
+  #   build: .
+  #   container_name: ubuntu
+  #   stdin_open: true # docker run -i
+  #   tty: true        # docker run -t
+
+  #   volumes:
+  #     - .:/home 
+  #   network_mode: "host"
+
+  # environment:
+      # MYSQL_HOST: mysql
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: secret
+      # MYSQL_DB: todos
+
+#   mysql:
+#     image: mysql:5.7
+#     volumes:
+#       - todo-mysql-data:/var/lib/mysql
+#     environment: 
+#       MYSQL_ROOT_PASSWORD: secret
+#       MYSQL_DATABASE: todos
+
+# volumes:
+#   todo-mysql-data:

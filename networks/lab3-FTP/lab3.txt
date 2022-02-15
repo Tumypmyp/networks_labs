@@ -1,0 +1,12 @@
+networks lab3
+
+task 1: open a ftp connection to the server
+
+# ncftp
+# open -u ftpUser -p ftpPass 194.87.96.192
+
+task 2: get the list of files in root folder
+
+# ls 
+
+

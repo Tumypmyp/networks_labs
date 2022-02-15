@@ -1,0 +1,6 @@
+to detach from container ctrl+p ctrl+q
+
+docker run -p 4000:4000 -ti tumypmyp/networks
+
+
+docker run -v C:\Users\Tumypmyp\docker\:/home/tumypmyp -ti -p 2000:2000 tumypmyp/networks
