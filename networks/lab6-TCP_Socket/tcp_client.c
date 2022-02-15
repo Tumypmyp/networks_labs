@@ -35,8 +35,8 @@ struct sockaddr_in make_socket_address(int port, uint32_t s_addr) {
 }
 
 int main(int argc, char *argv[]) {
-	if (argc != 3) {
-		printf("Usage: %s hostname port\n", argv[0]);
+	if (argc < 3) {
+		printf("Usage: %s hostname port [message]\n", argv[0]);
 		exit(1);
 	}
 
@@ -59,8 +59,12 @@ int main(int argc, char *argv[]) {
 
 	// Make message
 	char buf[12];
-	strcpy(buf, "abcd efgh");
-	 
+	if (3 < argc) {
+		strcpy(buf, argv[3]);
+	} else {
+		strcpy(buf, "abcd efgh");
+	}
+
 	// Send message
 	if (send(sock, buf, sizeof(buf), 0) < 0) {
 		printf("Sending error\n");
