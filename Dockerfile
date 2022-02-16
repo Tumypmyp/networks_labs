@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 WORKDIR /home
 
-RUN mkdir user
+RUN mkdir tumypmyp
 
 RUN apt-get update --fix-missing
 
@@ -14,4 +14,9 @@ RUN apt-get -y --force-yes install net-tools iputils-ping
 
 RUN apt-get -y --force-yes install tree
 
+WORKDIR /home/tumypmyp
+
+RUN git clone https://github.com/tumypmyp/networks_labs/
+
 ENTRYPOINT /bin/bash
+
