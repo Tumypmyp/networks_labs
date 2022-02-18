@@ -15,7 +15,6 @@ int create_socket() {
 	return sock;
 }
 
-
 struct hostent* convert_host_name(char* name) {
 	struct hostent* hostnm = gethostbyname(name);
 	if (hostnm == (struct hostent *) 0) {
@@ -24,7 +23,6 @@ struct hostent* convert_host_name(char* name) {
 	}
 	return hostnm;
 }
-
 
 struct sockaddr_in make_socket_address(int port, uint32_t s_addr) {
 	struct sockaddr_in server;
@@ -56,7 +54,6 @@ int main(int argc, char *argv[]) {
 	}
 	printf("Connected...\n");
 
-
 	// Make message
 	char buf[12];
 	if (3 < argc) {
@@ -71,19 +68,10 @@ int main(int argc, char *argv[]) {
 		exit(5);
 	}
 	printf("Message sent: %s\n", buf);
-
-
-	// // Receive message
-	// if (recv(sock, buf, sizeof(buf), 0) < 0) {
-	// 	printf("Receiving error\n");
-	// 	exit(6);
-	// }
-	// printf("Server reply: %s\n", buf);
-
 	
-	// Close socket
+	// Closing socket
 	if (close(sock) < 0) {
-		printf("socket can not be closed\n");
+		printf("Socket can not be closed\n");
 		exit(7);
 	}
 	printf("Socket closed...\n");

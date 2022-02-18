@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
 
 	bind_socket(sock, server_address);
 
-	printf("server started\n");
+	printf("Server started...\n");
 
 	char buf[BUFFER_SIZE] = {};
 	int i = 0;
@@ -130,7 +130,14 @@ int main(int argc, char *argv[]) {
 			exit(7);
 		}
 		printf("Chat updated:\n%s\n", buf);
-
 	}
-	return 0;      
+
+	// Closing socket
+	if (close(sock) < 0) {
+		printf("Server socket can not be closed\n");
+		exit(9);
+	}
+	printf("Server socket closed...\n");
+	printf("Server executed successfully.\n\n");
+	return 0;   
 }

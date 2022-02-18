@@ -50,27 +50,31 @@ int main(int argc, char *argv[]) {
 	struct sockaddr_in server = make_socket_address(port, *((unsigned long *)host_name->h_addr));
 
 
-
 	char buf[BUFFER_SIZE] = {};
 	scanf("%s", buf);
+
 
 	int namelen = sizeof(server);
 	if (sendto(sock, buf, strlen(buf), MSG_CONFIRM, (const struct sockaddr *) &server, namelen) < 0) {
 		printf("Sending error\n");
 		exit(3);
 	}
-	// printf("Message sent:\n%s\n", buf);
 
 
-
-	// struct sockaddr_in client;
 	int n;
 	if ((n = recvfrom(sock, buf, sizeof(buf), MSG_WAITALL, (struct sockaddr*) &server, &namelen)) < 0) {
 		printf("Receiving error\n");
 		exit(6);
 	}
 	printf("\nChat:\n%s\n", buf);
-	// buffer[n] = '\0';
 
+
+	// Closing socket
+	if (close(sock) < 0) {
+		printf("Client socket can not be closed\n");
+		exit(9);
+	}
+	printf("Client socket closed...\n");
+	printf("Client executed successfully.\n\n");
 	return 0;      
 }
