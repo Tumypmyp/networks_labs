@@ -1,28 +1,39 @@
 version: "3.7"
 
 services:
-  ubuntu:
+  ubuntu1:
     build: .
-    container_name: ubuntu
+    container_name: ubuntu1
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    volumes:
-      - .:/home/tumypmyp
-    # network_mode: "host"
-    ports:
-       - 1000:1000
+    # volumes:
+    #   - .:/home/tumypmyp
+    networks:
+      app_net:
+        ipv4_address: 192.168.0.11
 
   ubuntu2:
     build: .
     container_name: ubuntu2
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    volumes:
-      - .:/home/tumypmyp
-    # network_mode: "host"
-    ports:
-       - 2000:2000
+    # volumes:
+    #   - .:/home/tumypmyp
+    networks:
+      app_net:
+        ipv4_address: 192.168.0.12
 
+  ubuntu3:
+    build: .
+    container_name: ubuntu3
+    # volumes:
+    #   - .:/home/tumypmyp
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    networks:
+      app_net:
+        ipv4_address: 192.168.0.13
+    
 
 
 
@@ -42,29 +53,13 @@ services:
       - 3000:3000 #optional
     restart: unless-stopped
 
-  # ubuntu_server:
-  #   build: .
-  #   container_name: ubuntu
-  #   stdin_open: true # docker run -i
-  #   tty: true        # docker run -t
+    networks:
+      app_net:
+        ipv4_address: 192.168.0.14
 
-  #   volumes:
-  #     - .:/home 
-  #   network_mode: "host"
-
-  # environment:
-      # MYSQL_HOST: mysql
-      # MYSQL_USER: root
-      # MYSQL_PASSWORD: secret
-      # MYSQL_DB: todos
-
-#   mysql:
-#     image: mysql:5.7
-#     volumes:
-#       - todo-mysql-data:/var/lib/mysql
-#     environment: 
-#       MYSQL_ROOT_PASSWORD: secret
-#       MYSQL_DATABASE: todos
-
-# volumes:
-#   todo-mysql-data:
+networks:
+  app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.0.0/24"
