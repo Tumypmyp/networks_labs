@@ -1,40 +1,5 @@
 to detach from container ctrl+p ctrl+q
 
-docker run -p 4000:4000 -ti tumypmyp/networks
-
-
-docker run -v C:\Users\Tumypmyp\docker\:/home/tumypmyp -ti -p 2000:2000 tumypmyp/networks
-
-
-docker run -d \
-  --name=wireshark \
-  --net=host \
-  --cap-add=NET_ADMIN \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=Europe/London \
-  -p 3000:3000 `#optional` \
-  -v /path/to/config:/config \
-  --restart unless-stopped \
-  lscr.io/linuxserver/wireshark
-
-
-docker network inspect bridge
-
-
-docker run -d --name=wireshark  --net=host   --cap-add=NET_ADMIN   -e PUID=1001   -e PGID=1001   -e TZ=Europe/London   -p 3000:3000   -v /path/to/config:/config   --restart unless-stopped   lscr.io/linuxserver/wireshark
-
-
-
-192.168.65.0/24
-
-any 4 IPs
-
-
-docker run --name admin --cap-add=NET_RAW --cap-add=NET_ADMIN -ti tumypmyp/networks
-
+write tshark to a file
 /usr/sbin/tshark -V -i any tcp port 8080 -d "tcp.port==8080,http" > /tmp/packet.out
 
-ENV TZ=Europe/Moscow
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

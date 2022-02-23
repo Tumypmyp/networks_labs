@@ -11,52 +11,7 @@ services:
     networks:
       app_net:
         ipv4_address: 192.168.0.11
-
-  ubuntu2:
-    build: .
-    container_name: ubuntu2
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    # volumes:
-    #   - .:/home/tumypmyp
-    networks:
-      app_net:
-        ipv4_address: 192.168.0.12
-
-  ubuntu3:
-    build: .
-    container_name: ubuntu3
-    # volumes:
-    #   - .:/home/tumypmyp
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    networks:
-      app_net:
-        ipv4_address: 192.168.0.13
-    
-
-
-
-  wireshark:
-    image: lscr.io/linuxserver/wireshark
-    container_name: wireshark
-    cap_add:
-      - NET_ADMIN
-    # network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
-    volumes:
-      - /path/to/config:/config
-    ports:
-      - 3000:3000 #optional
-    restart: unless-stopped
-
-    networks:
-      app_net:
-        ipv4_address: 192.168.0.14
-
+            
 networks:
   app_net:
     ipam:

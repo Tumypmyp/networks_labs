@@ -15,3 +15,8 @@ To run a user container:
 ```
 docker run --name user -ti tumypmyp/networks
 ```
+
+To check IPs of users
+```
+docker network inspect bridge
+```
